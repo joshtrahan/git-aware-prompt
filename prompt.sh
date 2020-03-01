@@ -5,19 +5,17 @@ find_git_branch() {
     if [[ "$branch" == "HEAD" ]]; then
       branch='detached*'
     fi
-    git_branch="($branch)"
-  else
-    git_branch=""
+    echo "($branch)"
   fi
+  unset branch
 }
 
 find_git_dirty() {
   local status=$(git status --porcelain 2> /dev/null)
   if [[ "$status" != "" ]]; then
-    git_dirty='*'
-  else
-    git_dirty=''
+    echo '*'
   fi
+  unset status
 }
 
 # PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
